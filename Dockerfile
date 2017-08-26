@@ -6,7 +6,10 @@ WORKDIR /elixir
 
 COPY . /elixir
 
-RUN mix deps.get
-RUN mix deps.compile
+RUN mix local.hex --force && \
+    mix local.rebar --force && \
+    mix deps.get && \
+    mix deps.compile && \
+    mix clean && mix deps.clean --unused
 
 CMD ["mix", "run", "--no-halt"]
