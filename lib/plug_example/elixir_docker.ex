@@ -1,4 +1,7 @@
 defmodule ElixirDocker.PlugExample do
+  @moduledoc """
+  Documentation for PlugExample of ElixirDocker.
+  """
   import Plug.Conn
 
   def init(options) do
