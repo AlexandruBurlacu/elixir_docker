@@ -13,15 +13,21 @@ defmodule ElixirDocker do
 
   """
   use Application
+  require Logger
 
   def hello do
     "Hello World"
   end
 
   def start(_type, _args) do
-    Task.start(fn ->
-      IO.puts hello
-    end)
+    children = [
+      Plug.Adapters.Cowboy.child_spec(:http, ElixirDocker.PlugExample,
+      [], port: 8080)
+    ]
+
+    Logger.info "Started application"
+
+    Supervisor.start_link(children, strategy: :one_for_one)
   end
 
 end
