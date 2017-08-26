@@ -21,7 +21,7 @@ defmodule ElixirDocker do
 
   def start(_type, _args) do
     children = [
-      Plug.Adapters.Cowboy.child_spec(:http, ElixirDocker.PlugExample,
+      Plug.Adapters.Cowboy.child_spec(:http, ElixirDocker.Router,
       [], port: 8080)
     ]
 
