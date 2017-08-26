@@ -9,18 +9,19 @@ defmodule ElixirDocker do
   ## Examples
 
       iex> ElixirDocker.hello
-      Entering...
-      Exiting!
-      :world
+      Hello World
 
   """
+  use Application
+
   def hello do
-    decorate_hello :world
+    "Hello World"
   end
 
-  defp decorate_hello(atom) do
-    IO.puts "Entering..."
-    IO.puts "Exiting!"
-    atom
+  def start(_type, _args) do
+    Task.start(fn ->
+      IO.puts hello
+    end)
   end
+
 end
