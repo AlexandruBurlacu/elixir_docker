@@ -9,4 +9,4 @@ install:
   - mix deps.compile
 
 script:
-  - mix test
+  - mix test test/*

@@ -23,7 +23,11 @@ defmodule ElixirDocker.Mixfile do
   defp deps do
     [
       {:cowboy, "~> 1.1.2"},
-      {:plug, "~> 1.3.4"}
+      {:plug, "~> 1.3.4"},
+      # for dev and test purpose only
+      {:credo, "~> 0.3.0"},
+      {:excheck, "~> 0.5", only: :test},
+      {:triq, github: "triqng/triq", only: :test}
     ]
   end
 end
