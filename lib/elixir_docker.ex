@@ -14,7 +14,7 @@ defmodule ElixirDocker do
   """
   use Application
   alias Plug.Adapters.Cowboy
-  import Users
+  alias Users
   require Logger
 
   def hello do
@@ -23,8 +23,8 @@ defmodule ElixirDocker do
 
   def start(_type, _args) do
     children = [
-      Supervisor.Spec.worker(ElixirDocker.Repo, [])
-      Cowboy.child_spec(:http, ElixirDocker.Router, [], port: 8080),
+      Supervisor.Spec.worker(ElixirDocker.Repo, []),
+      Cowboy.child_spec(:http, ElixirDocker.Router, [], port: 8080)
     ]
 
     Logger.info "Started application"
