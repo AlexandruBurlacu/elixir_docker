@@ -27,7 +27,7 @@ defmodule ElixirDocker do
     ]
 
     Logger.info "Started application"
-    Logger.info Users.count
+    Logger.info Users.count("http://jsonplaceholder.typicode.com/users")
 
     Supervisor.start_link(children, strategy: :one_for_one)
   end
