@@ -1,0 +1,14 @@
+.git
+.gitignore
+.log
+.travis.yml
+tmp/
+README.md
+LICENSE
+test/
+Dockerfile
+docker-compose.yml
+# Mix artifacts
+_build/
+deps/
+mix.lock
