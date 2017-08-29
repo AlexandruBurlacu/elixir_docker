@@ -23,7 +23,8 @@ defmodule ElixirDocker do
 
   def start(_type, _args) do
     children = [
-      Cowboy.child_spec(:http, ElixirDocker.Router, [], port: 8080)
+      Supervisor.Spec.worker(ElixirDocker.Repo, [])
+      Cowboy.child_spec(:http, ElixirDocker.Router, [], port: 8080),
     ]
 
     Logger.info "Started application"
