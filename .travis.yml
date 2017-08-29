@@ -12,7 +12,8 @@ env:
   - MIX_ENV=test
 
 script:
-  - mix coveralls.travis test/*
+  - mix test test/*
+  - mix coveralls.travis
 
 notifications:
   email: false
