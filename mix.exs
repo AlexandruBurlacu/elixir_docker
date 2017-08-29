@@ -31,7 +31,7 @@ defmodule ElixirDocker.Mixfile do
       {:poison, "~> 1.5"},
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
       # for dev and test purpose only
-      {:excoveralls, github: "parroty/excoveralls", only: :test}
+      {:excoveralls, github: "parroty/excoveralls", only: :test},
       {:credo, "~> 0.3.0", only: [:test, :dev]},
       {:excheck, "~> 0.5", only: :test},
       {:triq, github: "triqng/triq", only: :test}
