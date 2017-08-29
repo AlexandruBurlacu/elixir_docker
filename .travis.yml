@@ -9,4 +9,10 @@ install:
   - mix deps.compile
 
 script:
-  - mix test test/*
+  - MIX_ENV=test mix test test/*, coveralls.json
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: false

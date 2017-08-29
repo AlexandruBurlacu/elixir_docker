@@ -23,7 +23,7 @@ defmodule ElixirDocker do
 
   def start(_type, _args) do
     children = [
-      Supervisor.Spec.worker(ElixirDocker.Repo, []),
+      # Supervisor.Spec.worker(ElixirDocker.Repo, []),
       Cowboy.child_spec(:http, ElixirDocker.Router, [], port: 8080)
     ]
 
