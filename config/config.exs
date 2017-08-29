@@ -7,7 +7,7 @@ adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL") || "postgres://localhost/elixir_docker_dev",
   pool_size: 5
 
-config :elixir_docker, ecto_repos: []
+config :elixir_docker, ecto_repos: [ElixirDocker.Repo]
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
