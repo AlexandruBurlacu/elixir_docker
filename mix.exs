@@ -15,7 +15,7 @@ defmodule ElixirDocker.Mixfile do
   def application do
     [
       mod: {ElixirDocker, []},
-      extra_applications: [:logger]
+      extra_applications: [:logger, :httpotion]
     ]
   end
 
@@ -24,6 +24,9 @@ defmodule ElixirDocker.Mixfile do
     [
       {:cowboy, "~> 1.1.2"},
       {:plug, "~> 1.3.4"},
+      {:httpotion, "~> 2.1.0"},
+      {:poison, "~> 1.5"},
+      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
       # for dev and test purpose only
       {:credo, "~> 0.3.0"},
       {:excheck, "~> 0.5", only: :test},

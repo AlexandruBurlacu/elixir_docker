@@ -3,8 +3,11 @@
   "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [], [], "hexpm"},
   "credo": {:hex, :credo, "0.3.13", "90d2d2deb9d376bb2a63f81126a320c3920ce65acb1294982ab49a8aacc7d89f", [:mix], [{:bunt, "~> 0.1.4", [hex: :bunt, repo: "hexpm", optional: false]}], "hexpm"},
   "excheck": {:hex, :excheck, "0.5.3", "7326a29cc5fdb6900e66dac205a6a70cc994e2fe037d39136817d7dab13cdabf", [:mix], [], "hexpm"},
+  "httpotion": {:hex, :httpotion, "2.1.0", "3fe84fbd13d4560c2514da656d022b1191a079178ee4992d245fc3c33c01ee18", [], [], "hexpm"},
+  "ibrowse": {:git, "https://github.com/cmullaparthi/ibrowse.git", "ea3305d21f37eced4fac290f64b068e56df7de80", [tag: "v4.1.2"]},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [], [], "hexpm"},
   "plug": {:hex, :plug, "1.3.5", "7503bfcd7091df2a9761ef8cecea666d1f2cc454cbbaf0afa0b6e259203b7031", [], [{:cowboy, "~> 1.0.1 or ~> 1.1", [hex: :cowboy, repo: "hexpm", optional: true]}, {:mime, "~> 1.0", [hex: :mime, repo: "hexpm", optional: false]}], "hexpm"},
+  "poison": {:hex, :poison, "1.5.2", "560bdfb7449e3ddd23a096929fb9fc2122f709bcc758b2d5d5a5c7d0ea848910", [], [], "hexpm"},
   "ranch": {:hex, :ranch, "1.3.2", "e4965a144dc9fbe70e5c077c65e73c57165416a901bd02ea899cfd95aa890986", [], [], "hexpm"},
   "sync": {:git, "https://github.com/rustyio/sync.git", "6e9d730c8674ee3fa27dd8146316f94d2d180f59", [tag: "master"]},
   "triq": {:git, "https://github.com/triqng/triq.git", "7a1187c8d696d40a6c45898b16a2d0235c4d56fb", []}}
