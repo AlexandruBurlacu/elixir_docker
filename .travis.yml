@@ -8,8 +8,11 @@ install:
   - mix deps.get
   - mix deps.compile
 
+env:
+  - MIX_ENV=test
+
 script:
-  - MIX_ENV=test mix coveralls.detail test/*
+  - mix coveralls.travis test/*
 
 notifications:
   email: false
