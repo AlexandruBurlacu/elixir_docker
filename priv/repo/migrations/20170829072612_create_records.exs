@@ -6,5 +6,6 @@ defmodule ElixirDocker.Repo.Migrations.CreateRecords do
       add :count, :integer
 
       timestamps
+    end
   end
 end

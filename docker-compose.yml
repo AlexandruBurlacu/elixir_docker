@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    image: elixir_docker:latest
+    image: alexburlacu/elixir_docker:latest
     deploy:
       replicas: 3
       restart_policy:
@@ -12,13 +12,19 @@ services:
           memory: 75M
     ports:
       - "7000:8080"
+    volumes:
+      - .:/app
     networks:
       - webnet
+    depends_on:
+      - db
+    links:
+      - db
 
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
-      - "8080:8080"
+      - "8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
@@ -26,6 +32,15 @@ services:
         constraints: [node.role == manager]
     networks:
       - webnet
+
+  db:
+    image: postgres
+    ports:
+      - "5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
 
 networks:
   webnet:

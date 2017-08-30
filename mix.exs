@@ -37,4 +37,10 @@ defmodule ElixirDocker.Mixfile do
       {:triq, github: "triqng/triq", only: :test}
     ]
   end
+
+  defp package do
+    %{licenses: ["MIT"],
+      maintainers: ["Alexandru Burlacu"],
+      links: %{"GitHub" => "https://github.com/AlexandruBurlacu/elixir_docker"}}
+  end
 end

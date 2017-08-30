@@ -3,8 +3,8 @@
 use Mix.Config
 
 config :elixir_docker, ElixirDocker.Repo,
-adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL") || "postgres://localhost/elixir_docker_dev",
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL") || "postgres://postgres:postgres@localhost/elixir_docker_dev",
   pool_size: 5
 
 config :elixir_docker, ecto_repos: [ElixirDocker.Repo]
