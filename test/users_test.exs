@@ -1,11 +1,13 @@
 defmodule UserTest do
   use ExUnit.Case
+  import ExUnit.CaptureIO
 
   test "count users" do
-    assert Users.count("http://jsonplaceholder.typicode.com/users") == "I got 10 users!"
+    assert is_map Users.count("http://jsonplaceholder.typicode.com/users")
   end
 
   test "wrong url" do
-    assert Users.count("http://jsonplaceholder.typicode.com") == "something wrong with the answer"
+    assert capture_io(fn -> Users.count("http://jsonplaceholder.typicode.com")
+    end) == "something wrong with the answer\n"
   end
 end

@@ -13,10 +13,8 @@ defmodule Users do
     response = HTTPotion.get url
 
     case Poison.Parser.parse(response.body) do
-      {:ok, json} -> "I got #{length(json)} users!"
-        Repo.insert! %Record{count: length(json)}
-      _           -> "something wrong with the answer"
+      {:ok, json} -> Repo.insert! %Record{count: length(json)}
+      _           -> IO.puts "something wrong with the answer"
     end
   end
 end
-

@@ -4,6 +4,7 @@ defmodule ElixirDocker.Router do
 
   alias ElixirDocker.Record
   alias ElixirDocker.Repo
+  alias Plug.Adapters.Cowboy
 
   plug :match
   plug :dispatch
@@ -13,9 +14,9 @@ defmodule ElixirDocker.Router do
   end
 
   def start_link do
-    {:ok, _} = Plug.Adapters.Cowboy.http(ElixirDocker.Router, [], port: 8080)
+    {:ok, _} = Cowboy.http(ElixirDocker.Router, [], port: 8080)
   end
-  
+
   get "/status" do
     last_run = Record |> Ecto.Query.last |> Repo.one
 
