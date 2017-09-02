@@ -15,8 +15,8 @@ defmodule ElixirDocker.Mixfile do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      mod: {ElixirDocker, []},
-      extra_applications: [:logger, :httpotion, :postgrex, :ecto]
+      extra_applications: [:logger, :httpotion, :postgrex, :ecto],
+      mod: {ElixirDocker, []}
     ]
   end
 

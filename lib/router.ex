@@ -1,9 +1,32 @@
 defmodule ElixirDocker.Router do
   use Plug.Router
+  import Plug.Conn
+
+  alias ElixirDocker.Record
+  alias ElixirDocker.Repo
 
   plug :match
   plug :dispatch
+
+  def init(options) do
+    options
+  end
+
+  def start_link do
+    {:ok, _} = Plug.Adapters.Cowboy.http(ElixirDocker.Router, [], port: 8080)
+  end
   
-  get "/", do: send_resp(conn, 200, "Welcome")
-  match _, do: send_resp(conn, 404, "Oops!")
+  get "/status" do
+    last_run = Record |> Ecto.Query.last |> Repo.one
+
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, Poison.encode!(%{last_run: last_run.inserted_at,
+                                       result_count: last_run.count}))
+  end
+
+  match _ do
+    conn
+    |> send_resp(404, Poison.encode!(%{endpoint: "not implemented!"}))
+  end
 end

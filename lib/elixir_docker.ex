@@ -13,7 +13,6 @@ defmodule ElixirDocker do
 
   """
   use Application
-  alias Plug.Adapters.Cowboy
   alias Users
   require Logger
 
@@ -24,13 +23,13 @@ defmodule ElixirDocker do
   def start(_type, _args) do
     children = [
       Supervisor.Spec.worker(ElixirDocker.Repo, []),
-      Cowboy.child_spec(:http, ElixirDocker.Router, [], port: 8080)
+      Supervisor.Spec.worker(ElixirDocker.Router, [])
     ]
 
-    Logger.info "Started application"
-    Logger.info Users.count("http://jsonplaceholder.typicode.com/users")
+    # Logger.info "Started application"
+    # Logger.info Users.count("http://jsonplaceholder.typicode.com/users")
 
-    Supervisor.start_link(children, strategy: :one_for_one)
+    Supervisor.start_link(children, strategy: :one_for_one, name: ElixirDocker.Supervisor)
   end
 
 end
