@@ -26,8 +26,8 @@ defmodule ElixirDocker do
       Supervisor.Spec.worker(ElixirDocker.Router, [])
     ]
 
-    # Logger.info "Started application"
-    # Logger.info Users.count("http://jsonplaceholder.typicode.com/users")
+    Logger.info "Started application"
+    # Users.count("http://jsonplaceholder.typicode.com/users")
 
     Supervisor.start_link(children, strategy: :one_for_one,
                           name: ElixirDocker.Supervisor)
