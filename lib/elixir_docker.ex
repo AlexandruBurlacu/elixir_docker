@@ -2,23 +2,10 @@ defmodule ElixirDocker do
   @moduledoc """
   Documentation for ElixirDocker.
   """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ElixirDocker.hello
-      Hello World
-
-  """
+  
   use Application
   alias Users
   require Logger
-
-  def hello do
-    "Hello World"
-  end
 
   def start(_type, _args) do
     children = [
