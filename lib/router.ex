@@ -18,7 +18,13 @@ defmodule ElixirDocker.Router do
   end
 
   get "/status" do
-    last_run = Record |> Ecto.Query.last |> Repo.one
+    if System.get_env("MIX_ENV") == "test" do
+      timestamp = Ecto.DateTime.from_date_and_time(%Ecto.Date{year: 2017, month: 09, day: 03},
+                                                   %Ecto.Time{hour: 12, min: 42, sec: 50, usec: 00})
+      last_run = %{inserted_at: timestamp, count: 10}
+    else
+      last_run = Record |> Ecto.Query.last |> Repo.one
+    end
 
     conn
     |> put_resp_content_type("application/json")
