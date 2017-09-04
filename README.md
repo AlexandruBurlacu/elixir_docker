@@ -4,4 +4,4 @@
 
 An API developed in Elixir inside a Docker container. For the sake of learning. Eventually I may try Docker's FaaS, but for now let's keep things simple.
 
-Even if Travis says that build is failing, it acctually works and the issue is in the configuration of the `.travis.yml` file. With a working Postgres database and adjusted `config.exs` file, all tests should pass.
+Currently the project is heavily inspired by [this repo](https://github.com/blackfist/tutorial_elixir_plug_ecto).
