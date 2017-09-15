@@ -25,8 +25,8 @@ defmodule ElixirDocker.Mixfile do
     [
       {:cowboy, "~> 1.1.2"},
       {:plug, "~> 1.3.4"},
-      {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 2.0.0-beta"},
+      {:postgrex, ">= 0.0.0", only: :dev},
+      {:ecto, "~> 2.0.0-beta", only: :dev},
       {:httpotion, "~> 2.1.0"},
       {:poison, "~> 1.5"},
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},

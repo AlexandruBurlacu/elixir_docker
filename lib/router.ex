@@ -6,9 +6,6 @@ defmodule ElixirDocker.Router do
   alias ElixirDocker.Repo
   alias Plug.Adapters.Cowboy
 
-  require Logger
-  require Poison
-
   plug :match
   plug :dispatch
 
