@@ -34,13 +34,11 @@ defmodule ElixirDocker.Router do
 
     conn
     |> put_resp_content_type("application/json")
-    |> (fn (x) -> Logger.error "It's ok"; x end).()
     |> send_resp(200, data)
   end
 
   match _ do
     conn
-    |> (fn (x) -> Logger.error "It's ok"; x end).()
     |> send_resp(404, Poison.encode!(%{endpoint: "not implemented!"}))
   end
 end

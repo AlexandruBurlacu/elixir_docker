@@ -14,7 +14,6 @@ defmodule ElixirDocker do
     ]
 
     Logger.info "Started application"
-    # Users.count("http://jsonplaceholder.typicode.com/users")
 
     Supervisor.start_link(children, strategy: :one_for_one,
                           name: ElixirDocker.Supervisor)

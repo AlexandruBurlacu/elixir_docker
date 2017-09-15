@@ -2,7 +2,6 @@ version: "3"
 services:
   web:
     image: alexburlacu/elixir_docker:latest
-    # build: Dockerfile
     deploy:
       replicas: 3
       restart_policy:
@@ -17,9 +16,6 @@ services:
       - .:/app
     depends_on:
       - db
-    # command: sh init_db.sh
-    # links:
-    #   - db
 
   db:
     image: postgres
