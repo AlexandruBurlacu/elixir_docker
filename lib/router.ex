@@ -3,6 +3,7 @@ defmodule ElixirDocker.Router do
   import Plug.Conn
 
   alias Plug.Adapters.Cowboy
+  alias ElixirDocker.Router.TasksRouter
 
   if Mix.env == :dev do
     use Plug.Debugger

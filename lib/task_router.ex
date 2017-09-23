@@ -1,4 +1,4 @@
-defmodule TasksRouter do
+defmodule ElixirDocker.Router.TasksRouter do
   use Plug.Router
 
   plug :match

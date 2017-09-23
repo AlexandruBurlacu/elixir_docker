@@ -4,7 +4,6 @@ defmodule ElixirDocker do
   """
   
   use Application
-  alias Users
   require Logger
   import Supervisor.Spec  
 
