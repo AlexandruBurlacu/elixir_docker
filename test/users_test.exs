@@ -7,7 +7,7 @@ defmodule UserTest do
   end
 
   test "count users" do
-    assert [:count , :inserted_at, :updated_at, :id, :__meta__]
+    assert [:count , :inserted_at, :updated_at, :id]
     |> Enum.all?(&(Map.has_key?(Users.count("http://jsonplaceholder.typicode.com/users"), &1)))
   end
 
