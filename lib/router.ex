@@ -2,10 +2,13 @@ defmodule ElixirDocker.Router do
   use Plug.Router
   import Plug.Conn
 
-  alias ElixirDocker.Record
-  alias ElixirDocker.Repo
   alias Plug.Adapters.Cowboy
 
+  if Mix.env == :dev do
+    use Plug.Debugger
+  end
+
+  plug Plug.Logger
   plug :match
   plug :dispatch
 
@@ -23,7 +26,7 @@ defmodule ElixirDocker.Router do
     |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
   end
 
-  get "/v1/tasks/{id}" do
+  get "/v1/tasks/:id" do
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
@@ -35,13 +38,13 @@ defmodule ElixirDocker.Router do
     |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
   end
 
-  put "/v1/tasks/{id}" do
+  put "/v1/tasks/:id" do
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
   end
 
-  delete "/v1/tasks/{id}" do
+  delete "/v1/tasks/:id" do
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
