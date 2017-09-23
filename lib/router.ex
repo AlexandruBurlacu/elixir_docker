@@ -6,9 +6,9 @@ defmodule ElixirDocker.Router do
 
   if Mix.env == :dev do
     use Plug.Debugger
+    plug Plug.Logger, log: :debug
   end
 
-  plug Plug.Logger
   plug :match
   plug :dispatch
 
@@ -20,35 +20,7 @@ defmodule ElixirDocker.Router do
     {:ok, _} = Cowboy.http(ElixirDocker.Router, [], port: 8080)
   end
 
-  get "/v1/tasks" do
-    conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
-  end
-
-  get "/v1/tasks/:id" do
-    conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
-  end
-
-  post "/v1/tasks" do
-    conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
-  end
-
-  put "/v1/tasks/:id" do
-    conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
-  end
-
-  delete "/v1/tasks/:id" do
-    conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(200, Poison.encode!(%{data: "Nothing to show"}))
-  end
+  forward "/v1/tasks", to: TasksRouter
 
   match _ do
     conn
