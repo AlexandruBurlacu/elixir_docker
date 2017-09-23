@@ -26,9 +26,9 @@ defmodule ElixirDocker.Mixfile do
       {:cowboy, "~> 1.1.2"},
       {:plug, "~> 1.3.4"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 2.0.0-beta"},
+      {:ecto, "~> 2.1.0"},
       {:httpotion, "~> 2.1.0"},
-      {:poison, "~> 1.5"},
+      {:poison, "~> 2.2"},
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
       # for dev and test purpose only
       {:excoveralls, github: "parroty/excoveralls", only: :test},

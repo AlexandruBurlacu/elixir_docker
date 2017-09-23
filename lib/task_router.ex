@@ -2,6 +2,9 @@ defmodule ElixirDocker.Router.TasksRouter do
   use Plug.Router
 
   plug :match
+  plug Plug.Parsers, parsers: [:json],
+                     pass:  ["application/json"],
+                     json_decoder: Poison
   plug :dispatch
 
   defp common_behaviour(connection) do
