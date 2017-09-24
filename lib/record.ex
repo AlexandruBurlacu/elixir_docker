@@ -1,4 +1,8 @@
 defmodule ElixirDocker.Record do
+  @moduledoc """
+  Describes the 'tasks' table in the Database.
+  """
+
   use Ecto.Schema
 
   schema "tasks" do

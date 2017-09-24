@@ -1,11 +1,11 @@
 defmodule ElixirDocker do
   @moduledoc """
-  Documentation for ElixirDocker.
+  Entry point and handler for ElixirDocker app.
   """
-  
+
   use Application
   require Logger
-  import Supervisor.Spec  
+  import Supervisor.Spec
 
   def start(_type, _args) do
     children = [

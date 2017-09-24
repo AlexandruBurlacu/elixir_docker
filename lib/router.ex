@@ -1,4 +1,8 @@
 defmodule ElixirDocker.Router do
+  @moduledoc """
+  Top level router of the TODO API.
+  """
+
   use Plug.Router
   import Plug.Conn
 
