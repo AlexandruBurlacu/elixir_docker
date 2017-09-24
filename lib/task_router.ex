@@ -5,6 +5,7 @@ defmodule ElixirDocker.Router.TasksRouter do
   """
 
   use Plug.Router
+  import Ecto.Query
 
   alias ElixirDocker.Record
   alias ElixirDocker.Repo
@@ -30,6 +31,17 @@ defmodule ElixirDocker.Router.TasksRouter do
     |> Enum.all?
   end
 
+  defp stringify_dates(raw_data) do
+    raw_data |> Enum.map(fn record ->
+      {{y, m, d}, _} = record.inserted_at
+      {due_y, due_m, due_d} = record.due_date
+
+      record
+      |> Map.put(:inserted_at, "#{y}-#{m}-#{d}")
+      |> Map.put(:due_date, "#{due_y}-#{due_m}-#{due_d}")
+    end)
+  end
+
   post "/" do
     data = conn.body_params
 
@@ -49,15 +61,24 @@ defmodule ElixirDocker.Router.TasksRouter do
   end
 
   get "/" do
-    conn
-    |> response(200, %{info: "Welcome from listing",
-                          data: [%{no: "posts"}, %{no: "posts"}]})
+    data = Repo.all(from t in "tasks",
+                    select: [:title, :description,
+                            :due_date, :priority,
+                            :inserted_at, :id])
+
+    conn |> response(200, %{info: "The available tasks",
+                            data: stringify_dates(data)})
   end
 
   get "/:id" do
-    conn
-    |> response(200, %{info: "Welcome from details",
-                          data: %{no: "info on #{id}"}})
+    data = Repo.all(from t in "tasks",
+                    where: t.id == ^String.to_integer(id),
+                    select: [:title, :description,
+                             :due_date, :priority,
+                             :inserted_at])
+
+    conn |> response(200, %{info: "Information about tasks ##{id}",
+                            data: stringify_dates(data)})
   end
 
   put "/:id" do
