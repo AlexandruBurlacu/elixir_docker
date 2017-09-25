@@ -45,18 +45,16 @@ defmodule ElixirDocker.Router.TasksRouter do
   post "/" do
     data = conn.body_params
 
-    if (valid_data?(data)) do
+    case (valid_data?(data)) do
+      true  -> record = %Record{title: data["title"],
+                                description: data["description"],
+                                due_date: Date.from_iso8601!(data["due_date"]),
+                                priority: data["priority"]}
 
-      record = %Record{title: data["title"],
-                       description: data["description"],
-                       due_date: Date.from_iso8601!(data["due_date"]),
-                       priority: data["priority"]}
+               resp = Repo.insert! record
 
-      resp = Repo.insert! record
-
-      conn |> response(201, %{info: "Task created", task_id: resp.id})
-    else
-      conn |> response(400, %{info: "Invalid body"})
+               conn |> response(201, %{info: "Task created", task_id: resp.id})
+      false -> conn |> response(400, %{info: "Invalid body"})
     end
   end
 
@@ -69,9 +67,11 @@ defmodule ElixirDocker.Router.TasksRouter do
                     select: [:title, :description,
                             :due_date, :priority,
                             :inserted_at, :id])
-
-    conn |> response(200, %{info: "The available tasks",
-                            data: stringify_dates(data)})
+    case (data) do
+      [] -> conn |> response(404, %{info: "No available tasks"})
+      _  -> conn |> response(200, %{info: "The available tasks",
+                                    data: stringify_dates(data)})
+    end
   end
 
   get "/:id" do
@@ -93,10 +93,19 @@ defmodule ElixirDocker.Router.TasksRouter do
   end
 
   put "/:id" do
-    IO.puts inspect conn.body_params
-    conn
-    |> response(200, %{info: "Welcome from update",
-                       data: %{no: "way to update #{id}"}})
+    data = conn.body_params
+
+    case (valid_data?(data)) do
+      true  -> resp = from(t in "tasks", where: t.id == ^String.to_integer(id),
+                           update: [set: [title: ^data["title"],
+                                          description: ^data["description"],
+                                          due_date: ^Date.from_iso8601!(data["due_date"]),
+                                          priority: ^data["priority"]]])
+                      |> Repo.update_all([])
+
+               conn |> response(200, %{info: "Task ##{id} updated"})
+      false -> conn |> response(400, %{info: "Invalid body"})
+    end
   end
 
   delete "/" do
