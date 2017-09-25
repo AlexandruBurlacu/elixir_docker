@@ -60,6 +60,10 @@ defmodule ElixirDocker.Router.TasksRouter do
     end
   end
 
+  post "/:id" do
+    conn |> response(405, %{info: "Impossible to update tasks via POST, use PUT instead"})
+  end
+
   get "/" do
     data = Repo.all(from t in "tasks",
                     select: [:title, :description,
@@ -77,19 +81,34 @@ defmodule ElixirDocker.Router.TasksRouter do
                              :due_date, :priority,
                              :inserted_at])
 
-    conn |> response(200, %{info: "Information about tasks ##{id}",
-                            data: stringify_dates(data)})
+    case (data) do
+      [] -> conn |> response(404, %{info: "No information about tasks ##{id}"})
+      _  -> conn |> response(200, %{info: "Information about tasks ##{id}",
+                                    data: stringify_dates(data)})
+    end
+  end
+
+  put "/" do
+    conn |> response(405, %{info: "Impossible to update all tasks"})
   end
 
   put "/:id" do
     conn
     |> response(200, %{info: "Welcome from update",
-                          data: %{no: "way to update #{id}"}})
+                       data: %{no: "way to update #{id}"}})
+  end
+
+  delete "/" do
+    conn |> response(405, %{info: "Impossible to delete all tasks"})
   end
 
   delete "/:id" do
-    conn
-    |> response(200, %{info: "Welcome from delete",
-                          data: %{no: "way to delete #{id}"}})
+    stats = Ecto.Adapters.SQL.query(Repo,
+      "DELETE FROM tasks WHERE id = $1", [String.to_integer id])
+
+    case (stats) do
+      {:ok, _}    -> conn |> response(200, %{info: "Task ##{id} deleted"})
+      {:error, _} -> conn |> response(700, %{info: "Task ##{id} not deleted"})
+    end
   end
 end
