@@ -93,6 +93,7 @@ defmodule ElixirDocker.Router.TasksRouter do
   end
 
   put "/:id" do
+    IO.puts inspect conn.body_params
     conn
     |> response(200, %{info: "Welcome from update",
                        data: %{no: "way to update #{id}"}})
