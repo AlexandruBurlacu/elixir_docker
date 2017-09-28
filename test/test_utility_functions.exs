@@ -46,25 +46,24 @@ defmodule UtilityFunctionsTest do
     end
   end
 
-#   property :stringify_dates_valid_input do
-#     for_all _ in int() do
-#       utc = DateTime.utc_now
+  property :stringify_dates_valid_input do
+    for_all _ in int() do
+      utc = DateTime.utc_now
 
-#       IO.inspect Date.to_date(utc)
+      raw_data = [%{
+        inserted_at: {
+          Date.to_erl(DateTime.to_date(utc)),
+          Time.to_erl(DateTime.to_time(utc))
+          },
+        due_date: Date.to_erl(Date.from_iso8601!("2017-09-27"))
+      }]
 
-#       raw_data = [%{
-#         inserted_at: {
-#           Date.to_string(Date.to_date(utc)),
-#           Time.to_string(Time.to_time(utc))
-#           },
-#         due_date: Date.from_iso8601!("2017-09-27")
-#       }]
+      output = TasksRouter.stringify_dates(raw_data)
 
-#       IO.puts inspect raw_data
-
-#       assert TaskRouter.stringify_dates raw_data == %{
-#           inserted_at: Date.to_string(utc),
-#           due_date: "2017-09-27"}
-#     end
-#   end
+      assert output == [%{due_date: "2017-9-27",
+          inserted_at: utc
+                      |> Date.to_erl
+                      |> (fn ({y, m, d}) -> "#{y}-#{m}-#{d}" end).()}]
+    end
+  end
 end
