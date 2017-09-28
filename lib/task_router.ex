@@ -16,13 +16,13 @@ defmodule ElixirDocker.Router.TasksRouter do
                      json_decoder: Poison
   plug :dispatch
 
-  defp response(connection, code, data) do
+  def response(connection, code, data) do
     connection
     |> put_resp_content_type("application/json")
     |> send_resp(code, Poison.encode!(data))
   end
 
-  defp valid_data?(data) do
+  def valid_data?(data) do
     ["title", "description", "due_date", "priority"]
     |> Enum.map(fn k ->
       data
@@ -31,7 +31,7 @@ defmodule ElixirDocker.Router.TasksRouter do
     |> Enum.all?
   end
 
-  defp stringify_dates(raw_data) do
+  def stringify_dates(raw_data) do
     raw_data |> Enum.map(fn record ->
       {{y, m, d}, _} = record.inserted_at
       {due_y, due_m, due_d} = record.due_date
