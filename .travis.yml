@@ -14,7 +14,6 @@ install:
 
 before_script:
   - mix do ecto.create, ecto.migrate
-  - echo 'Users.count("http://jsonplaceholder.typicode.com/users")' | iex -S mix
 
 script:
   - MIX_ENV=test mix coveralls.travis test/*
