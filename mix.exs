@@ -8,7 +8,8 @@ defmodule ElixirDocker.Mixfile do
       elixir: "~> 1.4",
       start_permanent: Mix.env == :prod,
       test_coverage: [tool: ExCoveralls],
-      deps: deps()
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -27,7 +28,6 @@ defmodule ElixirDocker.Mixfile do
       {:plug, "~> 1.3.4"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 2.1.0"},
-      {:httpotion, "~> 2.1.0"},
       {:poison, "~> 2.2"},
       {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
       # for dev and test purpose only

@@ -1,7 +1,7 @@
 defmodule ElixirDocker.Router.TasksRouter do
   @moduledoc """
   Special purpose router to handle
-  CRUD operations over 'tasks' in the TODO API.
+  CRUD operations over 'tasks' in the ToDo API.
   """
 
   use Plug.Router
@@ -9,6 +9,7 @@ defmodule ElixirDocker.Router.TasksRouter do
 
   alias ElixirDocker.Record
   alias ElixirDocker.Repo
+  alias Ecto.Adapters.SQL
 
   plug :match
   plug Plug.Parsers, parsers: [:json],
@@ -55,11 +56,14 @@ defmodule ElixirDocker.Router.TasksRouter do
 
                conn |> response(201, %{info: "Task created", task_id: resp.id})
       false -> conn |> response(400, %{info: "Invalid body"})
+      _     -> conn |> response(404, %{info: "Something strange has happened"})
     end
   end
 
   post "/:id" do
-    conn |> response(405, %{info: "Impossible to update tasks via POST, use PUT instead"})
+    conn
+    |> response(405, %{info: "Impossible to update tasks via POST,
+    use PUT instead"})
   end
 
   get "/" do
@@ -97,14 +101,17 @@ defmodule ElixirDocker.Router.TasksRouter do
 
     case (valid_data?(data)) do
       true  -> resp = from(t in "tasks", where: t.id == ^String.to_integer(id),
-                           update: [set: [title: ^data["title"],
-                                          description: ^data["description"],
-                                          due_date: ^Date.from_iso8601!(data["due_date"]),
-                                          priority: ^data["priority"]]])
+                           update: [set:
+                             [title: ^data["title"],
+                              description: ^data["description"],
+                              due_date: ^Date.from_iso8601!(data["due_date"]),
+                              priority: ^data["priority"]]
+                             ])
                       |> Repo.update_all([])
 
                conn |> response(200, %{info: "Task ##{id} updated"})
       false -> conn |> response(400, %{info: "Invalid body"})
+      _     -> conn |> response(404, %{info: "Something strange has happened"})
     end
   end
 
@@ -113,7 +120,7 @@ defmodule ElixirDocker.Router.TasksRouter do
   end
 
   delete "/:id" do
-    stats = Ecto.Adapters.SQL.query(Repo,
+    stats = SQL.query(Repo,
       "DELETE FROM tasks WHERE id = $1", [String.to_integer id])
 
     case (stats) do

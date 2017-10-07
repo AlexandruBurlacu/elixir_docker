@@ -1,8 +1,8 @@
 # ElixirDocker
 
-[![Build Status](https://travis-ci.org/AlexandruBurlacu/elixir_docker.png?branch=master)](https://travis-ci.org/AlexandruBurlacu/elixir_docker) [![Coverage Status](https://coveralls.io/repos/github/AlexandruBurlacu/elixir_docker/badge.svg?branch=master)](https://coveralls.io/github/AlexandruBurlacu/elixir_docker?branch=master)
+[![Build Status](https://travis-ci.org/AlexandruBurlacu/elixir_docker.png?branch=master)](https://travis-ci.org/AlexandruBurlacu/elixir_docker) [![Coverage Status](https://coveralls.io/repos/github/AlexandruBurlacu/elixir_docker/badge.svg?branch=master)](https://coveralls.io/github/AlexandruBurlacu/elixir_docker?branch=master) [![Ebert](https://ebertapp.io/github/AlexandruBurlacu/elixir_docker.svg)](https://ebertapp.io/github/AlexandruBurlacu/elixir_docker)
 
-Simple TODO REST API developed in Elixir inside a Docker container.
+Simple ToDo REST API developed in Elixir inside a Docker container.
 
 ## Routes
 ***POST*** `/v1/tasks`
