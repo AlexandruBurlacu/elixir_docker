@@ -62,8 +62,8 @@ defmodule ElixirDocker.Router.TasksRouter do
 
   post "/:id" do
     conn
-    |> response(405, %{info: "Impossible to update tasks via POST,
-    use PUT instead"})
+    |> response(405,
+       %{info: "Impossible to update tasks via POST, use PUT instead"})
   end
 
   get "/" do
@@ -100,14 +100,15 @@ defmodule ElixirDocker.Router.TasksRouter do
     data = conn.body_params
 
     case (valid_data?(data)) do
-      true  -> resp = from(t in "tasks", where: t.id == ^String.to_integer(id),
-                           update: [set:
-                             [title: ^data["title"],
-                              description: ^data["description"],
-                              due_date: ^Date.from_iso8601!(data["due_date"]),
-                              priority: ^data["priority"]]
-                             ])
-                      |> Repo.update_all([])
+      true  -> from(t in "tasks",
+                    where: t.id == ^String.to_integer(id),
+                    update: [set:
+                              [title: ^data["title"],
+                               description: ^data["description"],
+                               due_date: ^Date.from_iso8601!(data["due_date"]),
+                               priority: ^data["priority"]]
+                            ])
+               |> Repo.update_all([])
 
                conn |> response(200, %{info: "Task ##{id} updated"})
       false -> conn |> response(400, %{info: "Invalid body"})
